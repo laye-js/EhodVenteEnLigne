@@ -20,22 +20,22 @@ namespace EhodBoutiqueEnLigne.Models.Services
         public string SetCulture(string language)
         {
             string culture;
-            switch (language)
+            switch (language.ToLowerInvariant()) // Convertir en minuscules pour éviter les problèmes de casse
             {
-                case ("English"):
+                case "english":
                     culture = "en";
                     break;
-                case ("French"):
+                case "french":
                     culture = "fr";
                     break;
-                case ("Spanish"):
-                    culture = "es";
+                case "wolof":
+                    culture = "wf";
                     break;
                 default:
                     culture = "en";
                     break;
             }
-            
+
             return culture;
         }
 
@@ -44,9 +44,11 @@ namespace EhodBoutiqueEnLigne.Models.Services
         /// </summary>
         public void UpdateCultureCookie(HttpContext context, string culture)
         {
+            // Configurer le cookie pour expirer dans un an
             context.Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)));
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) });
         }
     }
 }
