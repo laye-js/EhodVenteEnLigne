@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using System;
 
 namespace EhodBoutiqueEnLigne.Models.Services
 {
@@ -29,7 +30,7 @@ namespace EhodBoutiqueEnLigne.Models.Services
                     culture = "fr";
                     break;
                 case "wolof":
-                    culture = "wf";
+                    culture = "wo";
                     break;
                 default:
                     culture = "en";
